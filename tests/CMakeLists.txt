@@ -9,5 +9,4 @@ foreach(case_file ${test_cases})
              COMMAND $<TARGET_FILE:${case_name}>
              WORKING_DIRECTORY
              ${PROJECT_BINARY_DIR})
-message(STATUS "$<TARGET_FILE:${case_name}> ${EXECUTABLE_OUTPUT_PATH}/${case_name} ${PROJECT_BINARY_DIR}")
 endforeach()
