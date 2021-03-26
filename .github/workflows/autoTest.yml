@@ -28,17 +28,27 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: gcc --version
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # get OS version
+      - name: Get OS version / Ubuntu
         if: matrix.os == 'ubuntu-20.04'
         run: |
           lsb_release -a
 
-      - name: Run a multi-line script
+      - name: Get OS version / MacOS
         if: matrix.os == 'macos-10.15'
         run: |
           sw_vers
+
+      # configure
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+
+      # build
+      - name: Build
+        run: cmake --build build --config Debug
+
+      # test
+      - name: Test
+        run: |
+          cd build
+          ctest -C Debug --output-on-failure --verbose
