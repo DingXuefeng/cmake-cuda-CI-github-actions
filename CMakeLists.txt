@@ -10,28 +10,22 @@ target_link_libraries(executor PRIVATE saxpy)
 
 add_library(Fit-lib INTERFACE)
 target_link_libraries(Fit-lib INTERFACE executor)
+target_include_directories(Fit-lib INTERFACE ${PROJECT_SOURCE_DIR})
 
 add_executable(Fit)
 target_sources(Fit PRIVATE main.cc)
 
 target_link_libraries(Fit PRIVATE Fit-lib)
 
-ExternalProject_Add(
-    gtest
-    URL http://googletest.googlecode.com/files/gtest-1.10.0.zip
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
-    URL_MD5 82358affdd7ab94854c8ee73a180fc53
-    INSTALL_COMMAND ""
-)
-
 # test
-ExternalProject_Get_Property(gtest source_dir binary_dir)
-add_library(libgtest INTERFACE)
-add_dependencies(libgtest gtest)
-target_link_libraries(libgtest
-    INTERFACE Threads::Threads
-              "${binary_dir}/libgtest_main.a"
-              "${binary_dir}/libgtest.a")
-target_include_directories(libgtest INTERFACE "${source_dir}/include")
+include(FetchContent)
+
+FetchContent_Declare(
+  googletest  
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        release-1.8.0
+)
+FetchContent_MakeAvailable(googletest)
+
 enable_testing()
 add_subdirectory(tests)
