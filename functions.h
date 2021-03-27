@@ -1,5 +1,6 @@
 #ifndef functions_H
 #define functions_H
+#include <thrust/detail/config.h>
 struct saxpy_functor
 {
     const float a;
