@@ -1,2 +1,3 @@
 int calculate(void);
-int calculate2(void);
+template<typename T>
+int calculate2(const T &op);

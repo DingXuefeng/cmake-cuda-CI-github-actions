@@ -1,4 +1,5 @@
 #include "executor.h"
+#include "functions.h"
 #include <iostream>
 
 int main(void)
@@ -6,7 +7,8 @@ int main(void)
     int sum = calculate();
     std::cout<<"sum is "<<sum<<std::endl;
 
-    sum = calculate2();
+    const saxpy_functor &op = saxpy_functor(4);
+    sum = calculate2(op);
     std::cout<<"sum is "<<sum<<std::endl;
 
     return 0;

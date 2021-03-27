@@ -58,6 +58,7 @@ FetchContent_Declare(
   )
 FetchContent_MakeAvailable(thrust)
 thrust_create_target(MyThrust HOST ${HOST} DEVICE ${DEVICE})
+target_compile_features(MyThrust INTERFACE cxx_std_14)
 
 if(DEVICE STREQUAL CUDA)
   set(CMAKE_CUDA_SEPARABLE_COMPILATION ON) # effective when created
@@ -67,25 +68,21 @@ else()
   add_compile_options(-x c++)
 endif()
 
+add_library(Fit-devicelib INTERFACE)
+target_link_libraries(Fit-devicelib INTERFACE MyThrust)
+
+
 add_library(saxpy STATIC functions.cu)
 target_link_libraries(saxpy PUBLIC Fit-devicelib)
 add_library(executor STATIC executor.cu executor2.cu)
 target_link_libraries(executor PRIVATE saxpy)
-set_target_properties(saxpy executor PROPERTIES
-    CXX_STANDARD 14
-    CXX_STANDARD_REQUIRED YES
-    CXX_EXTENSIONS NO
-)
-
-add_library(Fit-devicelib INTERFACE)
-target_link_libraries(Fit-devicelib INTERFACE MyThrust)
 
 add_library(Fit-lib INTERFACE)
 target_link_libraries(Fit-lib INTERFACE executor)
 target_include_directories(Fit-lib INTERFACE ${PROJECT_SOURCE_DIR})
 
 add_executable(Fit main.cc)
-target_link_libraries(Fit PRIVATE Fit-lib)
+target_link_libraries(Fit PRIVATE Fit-lib Fit-devicelib)
 
 # test
 include(FetchContent)

@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "functions.h"
 #include "executor.h"
 
 TEST (MyTest, FirstTest) { 
@@ -6,5 +7,6 @@ TEST (MyTest, FirstTest) {
 }
 
 TEST (MyTest, SecondTest) { 
-    EXPECT_EQ (190, calculate2());
+    const saxpy_functor &op = saxpy_functor(4);
+    EXPECT_EQ (190, calculate2(op));
 }
