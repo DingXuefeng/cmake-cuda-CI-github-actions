@@ -60,6 +60,7 @@ FetchContent_MakeAvailable(thrust)
 thrust_create_target(MyThrust HOST ${HOST} DEVICE ${DEVICE})
 
 if(DEVICE STREQUAL CUDA)
+  enable_language(CUDA)
   set(CMAKE_CUDA_SEPARABLE_COMPILATION ON) # effective when created
 else()
   file(GLOB_RECURSE CUDA_FILES *.cu)
