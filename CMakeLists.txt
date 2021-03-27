@@ -75,7 +75,7 @@ target_link_libraries(Fit-devicelib INTERFACE MyThrust)
 
 add_library(saxpy STATIC functions.cu)
 target_link_libraries(saxpy PUBLIC Fit-devicelib)
-add_library(executor STATIC executor.cu executor2.cu)
+add_library(executor STATIC executor.cu)
 target_link_libraries(executor PUBLIC saxpy)
 
 add_library(Fit-lib INTERFACE)

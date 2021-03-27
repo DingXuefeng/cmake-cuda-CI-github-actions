@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "functions.h"
 #include "executor.h"
+#include "executor2.h"
 
 TEST (MyTest, FirstTest) { 
     EXPECT_EQ (145, calculate());
