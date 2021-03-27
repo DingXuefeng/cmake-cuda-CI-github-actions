@@ -61,6 +61,7 @@ thrust_create_target(MyThrust HOST ${HOST} DEVICE ${DEVICE})
 target_compile_features(MyThrust INTERFACE cxx_std_14)
 
 if(DEVICE STREQUAL CUDA)
+  enable_language(CUDA)
   set(CMAKE_CUDA_SEPARABLE_COMPILATION ON) # effective when created
 else()
   file(GLOB_RECURSE CUDA_FILES *.cu)
