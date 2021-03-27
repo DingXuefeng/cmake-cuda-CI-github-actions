@@ -76,14 +76,14 @@ target_link_libraries(Fit-devicelib INTERFACE MyThrust)
 add_library(saxpy STATIC functions.cu)
 target_link_libraries(saxpy PUBLIC Fit-devicelib)
 add_library(executor STATIC executor.cu executor2.cu)
-target_link_libraries(executor PRIVATE saxpy)
+target_link_libraries(executor PUBLIC saxpy)
 
 add_library(Fit-lib INTERFACE)
 target_link_libraries(Fit-lib INTERFACE executor)
 target_include_directories(Fit-lib INTERFACE ${PROJECT_SOURCE_DIR})
 
 add_executable(Fit main.cc)
-target_link_libraries(Fit PRIVATE Fit-lib Fit-devicelib)
+target_link_libraries(Fit PRIVATE Fit-lib)
 
 # test
 include(FetchContent)
