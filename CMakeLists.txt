@@ -78,7 +78,7 @@ target_link_libraries(saxpy PUBLIC Fit-devicelib)
 add_library(executor STATIC executor.cu)
 target_link_libraries(executor PUBLIC saxpy)
 add_library(executor2 STATIC executor2.cu)
-target_link_libraries(executor PUBLIC saxpy)
+target_link_libraries(executor2 PUBLIC saxpy)
 
 add_library(Fit-lib INTERFACE)
 target_link_libraries(Fit-lib INTERFACE executor executor2)
