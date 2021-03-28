@@ -2,7 +2,7 @@
 
 saxpy_functor::saxpy_functor(float _a) : a(_a) {}
 
-__host__ __device__
-float saxpy_functor::operator()(const float& x, const float& y) const { 
+__device__
+int saxpy_functor::operator()(const int& x, const int& y) const { 
     return a * x + y;
 }

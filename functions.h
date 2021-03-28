@@ -7,7 +7,7 @@ struct saxpy_functor
 
     saxpy_functor(float _a);
 
-    __host__ __device__
-	float operator()(const float& x, const float& y) const;
+    __device__
+	int operator()(const int& x, const int& y) const ;
 };
 #endif
