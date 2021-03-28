@@ -77,9 +77,11 @@ add_library(saxpy STATIC functions.cu)
 target_link_libraries(saxpy PUBLIC Fit-devicelib)
 add_library(executor STATIC executor.cu)
 target_link_libraries(executor PUBLIC saxpy)
+add_library(executor2 STATIC executor2.cu)
+target_link_libraries(executor PUBLIC saxpy)
 
 add_library(Fit-lib INTERFACE)
-target_link_libraries(Fit-lib INTERFACE executor)
+target_link_libraries(Fit-lib INTERFACE executor executor2)
 target_include_directories(Fit-lib INTERFACE ${PROJECT_SOURCE_DIR})
 
 add_executable(Fit main.cc)
@@ -91,6 +93,7 @@ FetchContent_Declare(
   googletest  
   GIT_REPOSITORY https://github.com/google/googletest.git
   GIT_TAG        release-1.8.0
+  SOURCE_SUBDIR  googletest
 )
 set(googletest_BUILD_TESTS OFF)
 FetchContent_MakeAvailable(googletest)

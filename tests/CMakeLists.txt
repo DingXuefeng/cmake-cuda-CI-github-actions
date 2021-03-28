@@ -4,7 +4,7 @@ foreach(case_file ${test_cases})
     set (case_name test_${case_name})
     add_executable(${case_name} ${case_file})
     target_link_libraries(${case_name} ${PROJECT_NAME}-lib 
-                          gtest gtest_main)
+                          gtest_main)
     add_test(NAME ${case_name}
              COMMAND $<TARGET_FILE:${case_name}>
              WORKING_DIRECTORY

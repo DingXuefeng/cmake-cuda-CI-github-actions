@@ -1,16 +1,9 @@
 #include "executor.h"
-#include "executor2.h"
-#include "functions.h"
 #include <iostream>
 
 int main(void)
 {
-    int sum = calculate();
-    std::cout<<"sum is "<<sum<<std::endl;
-
-    const saxpy_functor &op = saxpy_functor(4);
-    sum = calculate2(op);
-    std::cout<<"sum is "<<sum<<std::endl;
-
+    std::cout<<"sum is "<<calculate()<<std::endl;
+    std::cout<<"sum is "<<calculate2()<<std::endl;
     return 0;
 }
